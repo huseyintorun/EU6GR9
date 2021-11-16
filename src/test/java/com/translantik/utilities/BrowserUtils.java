@@ -52,6 +52,7 @@ public class BrowserUtils {
         return elemTexts;
     }
 
+
     /**
      * Extracts text from list of elements matching the provided locator into new List<String>
      *
@@ -375,6 +376,21 @@ public class BrowserUtils {
         new WebDriverWait(Driver.get(), time).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    public static void sleep(int second) {
 
+        second*=1000;
+
+        try {
+
+            Thread.sleep(second);
+
+        } catch (InterruptedException e) {
+
+            System.out.println("something happened in the sleep method");
+
+        }
+
+
+    }
 
 }
