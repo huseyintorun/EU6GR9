@@ -27,7 +27,7 @@ Feature: login functionality
 
   Scenario: All users can see their own usernames in profile menu
 
-  Scenario Outline: All users can log in with valid credentials
+  Scenario Outline: "<userType>" can log in with valid credentials
     When the user logged in as "<userType>"
     Then the user see their own usernames in profile menu "<userName>"
     Examples:
@@ -41,7 +41,7 @@ Feature: login functionality
     Then the user should see "Invalid user name or password." message
   @wip
   Scenario: User should see the password in bullet signs by default
-    When the user enter "password"
+    When the user enter password
     Then the user should see bullet signs by default
 
   Scenario: User land on the "Forgot Password" page after clicking on the "Forgot your password?" link

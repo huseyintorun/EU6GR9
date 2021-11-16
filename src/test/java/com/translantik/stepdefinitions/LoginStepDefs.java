@@ -109,9 +109,10 @@ public class LoginStepDefs {
         Assert.assertEquals("Verify the page",expectedText,actualText);
     }
 
-    @When("the user enter {string}")
+    @When("the user enter password")
     public void theUserEnter(String password) {
-        loginPage.passwordLp.sendKeys("karakara");
+        password = faker.internet().password();
+        loginPage.passwordLp.sendKeys(password);
         loginPage.userNameLp.sendKeys("saksak");
 
         BrowserUtils.waitFor(2);
