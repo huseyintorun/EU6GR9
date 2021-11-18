@@ -10,7 +10,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-
 import java.util.Set;
 
 public class LogoutStepDefs {
@@ -19,7 +18,7 @@ public class LogoutStepDefs {
 
     @Given("{string} logged in successfully")
     public void loggedInSuccessfully(String userType) {
-        BrowserUtils.sleep(2);
+        BrowserUtils.waitForVisibility(loginPage.submit,10);
         String username = null;
         String password = null;
         switch (userType) {
@@ -46,24 +45,19 @@ public class LogoutStepDefs {
         loginPage.login(username, password);
     }
 
-
-
-
     @When("the {string} click on the logout button")
     public void the_click_on_the_logout_button(String string) {
         BrowserUtils.waitFor(1);
         dashboardPage.logOut();
-
     }
-
 
     @And("the {string} landed in login page")
     public void theUserLandedInLoginPage(String string) {
+        BrowserUtils.waitForVisibility(loginPage.submit,10);
         String actualTitle = Driver.get().getTitle();
         String expectedTitle = "Login";
         Assert.assertEquals("verify the page",actualTitle,expectedTitle);
     }
-
 
     @And("the {string} can not go to the home page again by clicking the step back button")
     public void theCanNotGoToTheHomePageAginByClickingTheStepBackButton(String arg0) {
@@ -71,7 +65,6 @@ public class LogoutStepDefs {
         String actualTitle = Driver.get().getTitle();
         String expectedTitle = "Login";
         Assert.assertEquals("verify the page",actualTitle,expectedTitle);
-
     }
 
     @When("the {string} close the tab")
@@ -79,21 +72,18 @@ public class LogoutStepDefs {
     Set<String> windowsHandles = Driver.get().getWindowHandles();
 
        Driver.closeDriver();
-
-
     }
-
-    @Then("the {string} can not be still logged in")
-    public void theCanNotBeStillLoggedIn(String arg0) {
-        System.out.println("Driver.get().getCurrentUrl() = " + Driver.get().getCurrentUrl());
-
-    }
-
 
     @Then("the {string} can log out successfully")
     public void theCanLogOutSuccessfully(String arg0) {
         String actualTitle = Driver.get().getTitle();
         String expectedTitle = "Login";
         Assert.assertEquals("verify the page",actualTitle,expectedTitle);
+    }
+
+    @Then("the {string} can not be still logged in")
+    public void theCanNotBeStillLoggedIn(String arg0) {
+        String currentUrl = Driver.get().getCurrentUrl();
+        Assert.assertFalse(currentUrl.contains("https://qa1.vytrack.com/login"));
     }
 }

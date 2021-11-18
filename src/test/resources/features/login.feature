@@ -1,3 +1,4 @@
+@smoke
 Feature: login functionality
 
   Background: User login

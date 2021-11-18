@@ -1,3 +1,4 @@
+@smoke
 Feature: logout functionality
 
   Background: the user logged in
