@@ -26,7 +26,7 @@ public class LoginPage {
     @FindBy(linkText = "Forgot your password?")
     public WebElement forgotPassword;
 
-    @FindBy(className = "custom-checkbox__icon")
+    @FindBy(id = "remember_me")
     public WebElement checkBox;
 
     @FindBy(css = ".custom-checkbox__text")

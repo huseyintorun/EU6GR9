@@ -6,7 +6,7 @@ Feature: logout functionality
   Scenario Outline: "User" can log out by using log out button inside profile info and ends up in login page
     Given "<userType>" logged in successfully
     When the "<userType>" click on the logout button
-    Then the "<userType>" can log out successfully
+    And the "<userType>" landed in login page
     Examples:
       | userType     |
       | driver       |
@@ -18,7 +18,7 @@ Feature: logout functionality
     Given "<userType>" logged in successfully
     When the "<userType>" click on the logout button
     Then the "<userType>" can log out successfully
-    And the "<userType>" can not go to the home page agin by clicking the step back button
+    And the "<userType>" can not go to the home page again by clicking the step back button
     Examples:
       | userType     |
       | driver       |

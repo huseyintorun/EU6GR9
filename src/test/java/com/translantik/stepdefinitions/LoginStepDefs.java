@@ -65,11 +65,11 @@ public class LoginStepDefs {
         Assert.assertEquals("verify the page", relatedPage, actualTitle);
     }
 
-    @When("the user enter invalid {string} and invalid {string}")
-    public void theUserEnterInvalidAndInvalid(String username, String password) {
+    @When("the user enter invalid username and invalid password")
+    public void theUserEnterInvalidAndInvalid() {
 
-        username=faker.name().username();
-        password=faker.internet().password();
+        String username=faker.name().username();
+        String password=faker.internet().password();
         loginPage.login(username,password);
 
     }
@@ -87,7 +87,11 @@ public class LoginStepDefs {
     public void theUserLoggedOutSuccessfullyAndPasteTheSameUrlToBrowserAndTryToSkipAuthenticationStep() {
         String currentUrl = Driver.get().getCurrentUrl();
         dashboardPage.logOut();
+       // BrowserUtils.waitFor(2);
+       // Driver.get().navigate().forward();
+       // BrowserUtils.waitFor(1);
         Driver.get().get(currentUrl);
+        BrowserUtils.waitFor(1);
 
     }
 
@@ -104,17 +108,13 @@ public class LoginStepDefs {
     @Then("the user should see {string} message")
     public void theUserShouldSeeMessage(String expectedText) {
         String actualText = loginPage.warning.getText();
-        System.out.println("actualText = " + actualText);
-        System.out.println("expectedText = " + expectedText);
         Assert.assertEquals("Verify the page",expectedText,actualText);
     }
 
     @When("the user enter password")
-    public void theUserEnter(String password) {
-        password = faker.internet().password();
+    public void theUserEnter() {
+       String password = faker.internet().password();
         loginPage.passwordLp.sendKeys(password);
-        loginPage.userNameLp.sendKeys("saksak");
-
         BrowserUtils.waitFor(2);
 
     }
@@ -125,13 +125,14 @@ for such a scenario would be: //h2[@id='stepone']/ancestor::ul
  */
     @Then("the user should see bullet signs by default")
     public void theUserShouldSeeBulletSignsByDefault() {
-        System.out.println("loginPage.passwordLp.getText() = " + loginPage.passwordLp.getAttribute("value"));
-        System.out.println(loginPage.passwordLp.getText());
-        System.out.println(loginPage.userNameLp.getText());
+        String type = loginPage.passwordLp.getAttribute("type");
+        Assert.assertEquals("Verify password",type,"password");
+        
+       
     }
 
-    @When("the user click on the {string}link")
-    public void theUserClickOnTheLink(String arg0) {
+    @When("the user click on the Forgot your password? link")
+    public void theUserClickOnTheLink() {
         loginPage.forgotPassword.click();
     }
 
@@ -139,8 +140,8 @@ for such a scenario would be: //h2[@id='stepone']/ancestor::ul
     @Then("the user land on the {string} page")
     public void theUserLandOnThePage(String forgotPassword) {
         String currentTitle = Driver.get().getTitle();
-        String expectedUrl = "Forgot Password";
-        Assert.assertEquals("Verify url",expectedUrl,currentTitle);
+
+        Assert.assertEquals("Verify url",forgotPassword,currentTitle);
     }
 
     @When("the user on the login page should user see the {string} link")
@@ -155,32 +156,25 @@ for such a scenario would be: //h2[@id='stepone']/ancestor::ul
 
     @Then("the user should be able to click on the checkbox")
     public void theUserShouldBeAbleToClickOnTheCheckbox() {
-        JavascriptExecutor jse = (JavascriptExecutor)Driver.get();
-        jse.executeScript("arguments[0].click();", loginPage.checkBox);
+        //JavascriptExecutor jse = (JavascriptExecutor)Driver.get();
+        //jse.executeScript("arguments[0].click();", loginPage.checkBox);
+        BrowserUtils.clickWithJS(loginPage.checkBox);
+        BrowserUtils.waitFor(4);
+
     }
 
     @And("the user should be able to click")
     public void theUserShouldBeAbleToClick() {
 
-        // check here again
-        BrowserUtils.waitFor(2);
-       Assert.assertTrue(!loginPage.checkBox.isSelected());
-    }
-
-
-    @When("the user clicks on Username input box enter {string} hit the enter")
-    public void theUserClicksOnUsernameInputBoxEnterHitTheEnter(String arg0) {
-        loginPage.userNameLp.sendKeys(ConfigurationReader.get("driver_username")+ Keys.ENTER);
-
-
+        Assert.assertTrue(loginPage.checkBox.isSelected());
 
     }
 
-    @Then("the user clicks on Password input box enter {string} hit the enter")
-    public void theUserClicksOnPasswordInputBoxEnterHitTheEnter(String arg0) {
-        loginPage.passwordLp.sendKeys(ConfigurationReader.get("driver_password")+ Keys.ENTER);
-    }
+    @When("the user clicks on Username hit the enter and enter Password input box hit the enter")
+    public void theUserClicksOnUsernameHitTheEnterAndEnterPasswordInputBoxHitTheEnter() {
+        loginPage.userNameLp.sendKeys(ConfigurationReader.get("driver_username")+ Keys.ENTER+ConfigurationReader.get("driver_password")+Keys.ENTER);
 
+    }
     @And("the user should be able to logged in")
     public void theUserShouldBeAbleToLoggedIn() {
         String actualTitle = Driver.get().getTitle();

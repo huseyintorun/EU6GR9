@@ -56,16 +56,16 @@ public class LogoutStepDefs {
 
     }
 
-    @Then("the {string} can log out successfully")
-    public void the_can_log_out_successfully(String string) {
+
+    @And("the {string} landed in login page")
+    public void theUserLandedInLoginPage(String string) {
         String actualTitle = Driver.get().getTitle();
         String expectedTitle = "Login";
         Assert.assertEquals("verify the page",actualTitle,expectedTitle);
-
     }
 
 
-    @And("the {string} can not go to the home page agin by clicking the step back button")
+    @And("the {string} can not go to the home page again by clicking the step back button")
     public void theCanNotGoToTheHomePageAginByClickingTheStepBackButton(String arg0) {
         Driver.get().navigate().back();
         String actualTitle = Driver.get().getTitle();
@@ -78,6 +78,9 @@ public class LogoutStepDefs {
     public void theCloseTheTab(String arg0) {
     Set<String> windowsHandles = Driver.get().getWindowHandles();
 
+       Driver.closeDriver();
+
+
     }
 
     @Then("the {string} can not be still logged in")
@@ -87,4 +90,10 @@ public class LogoutStepDefs {
     }
 
 
+    @Then("the {string} can log out successfully")
+    public void theCanLogOutSuccessfully(String arg0) {
+        String actualTitle = Driver.get().getTitle();
+        String expectedTitle = "Login";
+        Assert.assertEquals("verify the page",actualTitle,expectedTitle);
+    }
 }
