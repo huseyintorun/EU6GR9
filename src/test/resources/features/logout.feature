@@ -1,9 +1,9 @@
-@smoke
+@logout
 Feature: logout functionality
 
   Background: the user logged in
     Given the user is on the loginpage
-
+@TRN-1033
   Scenario Outline: "User" can log out by using log out button inside profile info and ends up in login page
     Given "<userType>" logged in successfully
     When the "<userType>" click on the logout button
@@ -13,7 +13,7 @@ Feature: logout functionality
       | driver       |
       | salesManager |
       | storeManager |
-
+@TRN-1034
   Scenario Outline: "user" can not go to the home page again by clicking the step back button
                       after successfully logged out
     Given "<userType>" logged in successfully
@@ -26,7 +26,7 @@ Feature: logout functionality
       | salesManager |
       | storeManager |
 
-
+@TRN-1035
   Scenario Outline: "user" must be logged out if the user close the open tab
   (all tabs if there are multiple open tabs)
     Given "<userType>" logged in successfully
