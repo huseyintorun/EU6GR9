@@ -1,10 +1,8 @@
 @logout
 Feature: logout functionality
   // I added some comments
-  // I add new comments 2
-  // I added new comments 3
-  // Iadd new 4
-
+  // 5ekle
+// 6 eklegit
 
   Background: the user logged in
     Given the user is on the loginpage
