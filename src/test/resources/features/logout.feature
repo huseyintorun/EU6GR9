@@ -3,6 +3,7 @@ Feature: logout functionality
   // I added some comments
   // I add new comments 2
   // I added new comments 3
+  // Iadd new 4
 
 
   Background: the user logged in
