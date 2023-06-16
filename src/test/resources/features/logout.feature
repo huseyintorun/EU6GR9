@@ -1,5 +1,6 @@
 @logout
 Feature: logout functionality
+  // I added some comments
 
   Background: the user logged in
     Given the user is on the loginpage
