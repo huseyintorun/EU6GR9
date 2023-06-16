@@ -2,7 +2,7 @@
 Feature: logout functionality
   // I added some comments
   // 5ekle
-
+// 6 eklegit
 
   Background: the user logged in
     Given the user is on the loginpage
